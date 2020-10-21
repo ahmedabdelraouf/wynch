@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Models\User;
+use Dev\Infrastructure\Models\User;
 use Dev\Domain\Service\UserService;
 use Illuminate\Http\Request;
 
@@ -12,13 +12,14 @@ class AuthController extends Controller
 {
     private $userService;
 
-    public function __construct(UserService $userService)
+    public function __construct()
     {
-        $this->userService = $userService;
+//        $this->userService = $userService;
     }
 
     public function register(Request $request)
     {
+        dd($request->all());
         $validatedData = $request->validate([
             'name' => 'required|max:55',
             'email' => 'email|required|unique:users',
@@ -36,6 +37,6 @@ class AuthController extends Controller
 
     public function login(UserRequest $request)
     {
-        
+
     }
 }
