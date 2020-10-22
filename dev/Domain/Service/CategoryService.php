@@ -61,7 +61,7 @@ class CategoryService extends AbstractService
      * @param Integer $id
      * @return Response
      */
-    public function destroy(Integer $id)
+    public function destroy(int $id)
     {
         return $this->repository->where('id', $id)->delete();
     }

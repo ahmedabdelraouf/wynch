@@ -23,9 +23,19 @@ class CategoryRequest extends AbstractFormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required',
+        switch ($this->getMethod()) {
+            case 'POST':
+                return [
+                    'name' => 'required',
 //            'image' => 'file',
-        ];
+                ];
+                break;
+            case 'PUT':
+                return [
+                    'name' => 'sometimes|required',
+//            'image' => 'file',
+                ];
+                break;
+        }
     }
 }

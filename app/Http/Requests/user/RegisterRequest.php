@@ -26,8 +26,9 @@ class RegisterRequest extends AbstractFormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required_without:phone|email',
-            'phone' => 'required_without:email|regex:/(01)[0-9]{9}/',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'email' => 'required_without:phone|email|unique:users',
+            'phone' => 'required_without:email|regex:/(01)[0-9]{9}/|unique:users',
             'password' => 'required|confirmed'
         ];
     }

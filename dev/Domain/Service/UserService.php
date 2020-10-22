@@ -33,14 +33,15 @@ class UserService extends AbstractService
     {
 
         $data['password'] = bcrypt($data['password']);
-
+        $imageName = time() . '.' . $data['image']->extension();
+        $data['image'] = $data['image']->storeAs('images', $imageName);;
         $user = $this->repository->create($data);
 
         $accessToken = $user->createToken('authToken')->accessToken;
 
         //TODO send email and phone confirmation codes
 
-        return response(['user' => $user, 'access_token' => $accessToken]);
+        return ['user' => $user, 'access_token' => $accessToken];
     }
 
 

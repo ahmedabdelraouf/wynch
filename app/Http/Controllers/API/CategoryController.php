@@ -4,14 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Http\Resources\CarResource;
 use App\Http\Resources\CategoryResource;
 use App\Models\Car;
 use Dev\Domain\Service\CategoryService;
+use Dev\Infrastructure\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -37,39 +36,38 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
-     * @return Response
+     * @param CategoryRequest $request
+     * @return CategoryResource
      */
     public function store(CategoryRequest $request)
     {
         $category = $this->categoryService->store($request->validated());
         return new CategoryResource($category);
-        }
+    }
 
     /**
      * Display the specified resource.
      *
-     * @param Car $car
-     * @return Response
+     * @param Category $car
+     * @return CategoryResource
      */
-    public function show(Car $car)
+    public function show(Category $category)
     {
-        return response(['car' => new CarResource($car), 'message' => 'Retrieved successfully'], 200);
+        return new CategoryResource($category);
 
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param Car $car
-     * @return Response
+     * @param CategoryRequest $request
+     * @param Category $car
+     * @return CategoryResource
      */
-    public function update(Request $request, Car $car)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $car->update($request->all());
-
-        return response(['ceo' => new CarResource($car), 'message' => 'Retrieved successfully'], 200);
+        $category = $this->categoryService->update($request->validated(), $category);
+        return new CategoryResource($category);
     }
 
     /**
@@ -79,10 +77,12 @@ class CategoryController extends Controller
      * @return Response
      * @throws Exception
      */
-    public function destroy(Car $car)
+    public function destroy(Category $category)
     {
-        $car->delete();
-
-        return response(['message' => 'Deleted']);
+        $category = $this->categoryService->destroy($category->id);
+        if ($category)
+            return response(['message' => 'Deleted']);
+        else
+            return response(['message' => 'Not deleted']);
     }
 }
