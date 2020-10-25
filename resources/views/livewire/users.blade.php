@@ -14,24 +14,37 @@
             <th>Name</th>
             <th>Email</th>
             <th>phone</th>
+            <th>phone verified</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($users as $value)
+        @foreach($users as $user)
             <tr>
-                <td>{{ $value->id }}</td>
+                <td>{{ $user->id }}</td>
                 <td>
-                    <img style="width: 3rem;height: 3rem" src="{{ asset($value->image) }}">
+                    <img style="width: 3rem;height: 3rem" src="{{ asset($user->image) }}">
                 </td>
-                <td>{{ $value->name }}</td>
-                <td>{{ $value->email }}</td>
-                <td>{{ $value->phone }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->phone }}</td>
                 <td>
-                    <button data-toggle="modal" data-target="#updateModal" wire:click="edit({{ $value->id }})"
+                    @if(isset($user->phone_verified_at))
+                        <h6>{{ $user->phone_verified_at->format('d M Y - H:i:s')  }}</h6>
+                        <button style="margin-top: .5rem" wire:click="disable({{ $user->id }})"
+                                class="btn btn-danger btn-sm">Disable account
+                        </button>
+                    @else
+                        <button style="margin-top: .5rem" wire:click="verify({{ $user->id }})"
+                                class="btn btn-info btn-sm">Activate account
+                        </button>
+                    @endif
+                <td>
+                    <button data-toggle="modal" data-target="#updateModal" wire:click="edit({{ $user->id }})"
                             class="btn btn-primary btn-sm">Edit
                     </button>
-                    <button wire:click="delete({{ $value->id }})" class="btn btn-danger btn-sm">Delete</button>
+                    <button wire:click="delete({{ $user->id }})" class="btn btn-danger btn-sm">Delete</button>
+
                 </td>
             </tr>
         @endforeach

@@ -84,4 +84,22 @@ class Users extends Component
             session()->flash('message', 'Users Deleted Successfully.');
         }
     }
+
+    public function verify($id)
+    {
+        if ($id) {
+            $user = User::where('id', $id)->first();
+            $user->update(['phone_verified_at' => now()]);
+            session()->flash('message', 'Account activated secefully.');
+        }
+    }
+
+    public function disable($id)
+    {
+        if ($id) {
+            $user = User::where('id', $id)->first();
+            $user->update(['phone_verified_at' => null]);
+            session()->flash('message', 'Account disabled');
+        }
+    }
 }
