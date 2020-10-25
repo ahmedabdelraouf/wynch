@@ -38,6 +38,9 @@ class CategoryService extends AbstractService
      */
     public function store(array $data)
     {
+        if (isset($data['image']))
+            $data['image'] = $data['image']->store('storage/uploads/categories', 'public');
+//        dd($data['image'],$category);
         return $this->repository->create($data);
     }
 

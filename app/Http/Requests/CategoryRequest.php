@@ -26,14 +26,14 @@ class CategoryRequest extends AbstractFormRequest
         switch ($this->getMethod()) {
             case 'POST':
                 return [
-                    'name' => 'required',
-//            'image' => 'file',
+                    'name' => 'required|unique:categories',
+                    'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ];
                 break;
             case 'PUT':
                 return [
-                    'name' => 'sometimes|required',
-//            'image' => 'file',
+                    'name' => 'sometimes|required|unique:categories',
+                    'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ];
                 break;
         }
