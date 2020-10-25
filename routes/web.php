@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +23,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
 Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories');
+
+Route::view('userslivewire', 'adminlte.users.index');

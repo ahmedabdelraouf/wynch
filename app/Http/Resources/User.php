@@ -20,7 +20,7 @@ class User extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
-            'image' => Storage::url($this->image),
+            'image' => $this->image,
         ];
     }
 }

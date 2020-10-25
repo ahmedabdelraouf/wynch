@@ -23,30 +23,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>name</th>
-                        <th>phone</th>
-                        <th>email</th>
-                        <th>created_at</th>
-{{--                        <th>action</th>--}}
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    @if(isset($users))
-                        @foreach($users as $user)
-                            <tr>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->phone}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->created_at}}</td>
-                            </tr>
-                        @endforeach
-                    @endif
-                    </tbody>
-                </table>
+                @include('livewire.home')
             </div>
             <!-- /.card-body -->
         </div>

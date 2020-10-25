@@ -28,19 +28,13 @@ class UserService extends AbstractService
         return $this->repository->get();
     }
 
-
     public function register(array $data)
     {
-
         $data['password'] = bcrypt($data['password']);
-        $imageName = time() . '.' . $data['image']->extension();
-        $data['image'] = $data['image']->storeAs('images', $imageName);;
+        $data['image'] = $data['image']->store('storage/uploads/users', 'public');
         $user = $this->repository->create($data);
-
         $accessToken = $user->createToken('authToken')->accessToken;
-
         //TODO send email and phone confirmation codes
-
         return ['user' => $user, 'access_token' => $accessToken];
     }
 
@@ -57,8 +51,22 @@ class UserService extends AbstractService
     public function updateProfile(User $user, array $validated)
     {
         $this->repository = $user;
+        if ($validated['image'] != null && isset($validated['image'])) {
+            $validated['image'] = $validated['image']->store('storage/uploads/users', 'public');
+        } else
+            $validated['image'] = $this->repository->image;
+
+        if ($validated['name'] == null || !isset($validated['name'])) {
+            $validated['name'] = $this->repository->name;
+        }
+        if ($validated['email'] == null || !isset($validated['email'])) {
+            $validated['email'] = $this->repository->email;
+        }
+        if ($validated['phone'] == null || !isset($validated['phone'])) {
+            $validated['phone'] = $this->repository->phone;
+        }
         $this->repository->update($validated);
-        return response(['user' => $this->repository]);
+        return $this->repository;
     }
 
 }

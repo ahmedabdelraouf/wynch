@@ -7,6 +7,7 @@ use App\Http\Requests\user\LoginRequest;
 use App\Http\Requests\user\ProfileRequest;
 use App\Http\Requests\user\RegisterRequest;
 use App\Http\Requests\user\RegisterRequestRequest;
+use App\Http\Resources\User as UserResource;
 use App\Models\User;
 use Dev\Domain\Service\UserService;
 
@@ -22,7 +23,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $data = $this->userService->register($request->validated());
-        $returnData = new \App\Http\Resources\User($data['user']);
+        $returnData = new UserResource($data['user']);
         return $returnData;
     }
 
@@ -38,7 +39,8 @@ class AuthController extends Controller
 
     public function profile(User $user)
     {
-        return response(['user' => $user]);
+        return new UserResource($user);
+//        return response(['user' => $user]);
     }
 
     public function forgetPassword(LoginRequest $request)
