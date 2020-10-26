@@ -41,7 +41,16 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = $this->categoryService->store($request->validated());
+        $category_data = [
+            'en' => [
+                'name' => $request->input('name')
+            ],
+            'ar' => [
+                'name' => $request->input('ar_name')
+            ],
+            'image' => $request->image,
+        ];
+        $category = $this->categoryService->store($category_data);
         return new CategoryResource($category);
     }
 
@@ -66,7 +75,21 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        $category = $this->categoryService->update($request->validated(), $category);
+//        $image = $category->image;
+//        if (isset($request->image)) {
+//            $image = $request->image;
+//        }
+        $category_data = [
+            'en' => [
+                'name' => $request->input('name')
+            ],
+            'ar' => [
+                'name' => $request->input('ar_name')
+            ],
+            'image' => $request->image
+        ];
+//        dd($category_data);
+        $category = $this->categoryService->update($category_data, $category);
         return new CategoryResource($category);
     }
 

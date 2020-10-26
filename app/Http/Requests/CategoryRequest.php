@@ -27,12 +27,14 @@ class CategoryRequest extends AbstractFormRequest
             case 'POST':
                 return [
                     'name' => 'required|unique:categories',
+                    'ar_name' => 'required',
                     'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ];
                 break;
             case 'PUT':
                 return [
                     'name' => 'sometimes|required|unique:categories',
+                    'ar_name' => 'sometimes|required',
                     'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ];
                 break;

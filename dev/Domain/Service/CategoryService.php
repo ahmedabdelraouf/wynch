@@ -40,7 +40,6 @@ class CategoryService extends AbstractService
     {
         if (isset($data['image']))
             $data['image'] = $data['image']->store('storage/uploads/categories', 'public');
-//        dd($data['image'],$category);
         return $this->repository->create($data);
     }
 
@@ -54,6 +53,14 @@ class CategoryService extends AbstractService
     public function update(array $data, Category $category)
     {
         $this->repository = $category;
+        if (isset($data['image'])) {
+            $data['image'] = $data['image']->store('storage/uploads/categories', 'public');
+            if (file_exists($category->image)) {
+                unlink($category->image);
+            }
+        } else {
+            $data['image'] = $this->repository->image;
+        }
         $this->repository->update($data);
         return $this->repository;
     }
