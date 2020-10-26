@@ -11,7 +11,6 @@ use Livewire\WithFileUploads;
 
 class Categories extends Component
 {
-
     use WithFileUploads;
     public $categories, $name, $description, $ar_name, $ar_description, $image, $category_id;
     public $updateMode = false;
