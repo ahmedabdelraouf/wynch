@@ -25,7 +25,8 @@ class CategoryService extends AbstractService
      * @param array $filters
      * @return
      */
-    public function index(array $filters = [])
+    public function
+    index(array $filters = [])
     {
         return $this->repository->get();
     }
@@ -53,7 +54,7 @@ class CategoryService extends AbstractService
     public function update(array $data, Category $category)
     {
         $this->repository = $category;
-        if (isset($data['image'])) {
+        if (isset($data['image']) && !empty($data['image'])) {
             $data['image'] = $data['image']->store('storage/uploads/categories', 'public');
             if (file_exists($category->image)) {
                 unlink($category->image);

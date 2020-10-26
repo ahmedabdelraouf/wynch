@@ -24,6 +24,7 @@ class CreateCategoryTranslationsTable extends Migration
 
             // Actual fields you want to translate
             $table->string('name')->nullable();
+            $table->longText('description')->nullable();
         });
     }
 

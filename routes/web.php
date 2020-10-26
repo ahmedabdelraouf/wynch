@@ -24,4 +24,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
 Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories');
 
-Route::view('userslivewire', 'adminlte.users.index');

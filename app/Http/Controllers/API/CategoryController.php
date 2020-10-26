@@ -75,23 +75,11 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-//        $image = $category->image;
-//        if (isset($request->image)) {
-//            $image = $request->image;
-//        }
-        $category_data = [
-            'en' => [
-                'name' => $request->input('name')
-            ],
-            'ar' => [
-                'name' => $request->input('ar_name')
-            ],
-            'image' => $request->image
-        ];
-//        dd($category_data);
+        $category_data = CategoryRequest::gettransatableData($request->all());
         $category = $this->categoryService->update($category_data, $category);
         return new CategoryResource($category);
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -12,36 +12,18 @@
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    @include('adminlte.layouts.sidebar')
+@include('adminlte.layouts.sidebar')
 
+<!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Users information</h3>
+                <h3 class="card-title">Categories</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>name</th>
-                        <th>created_at</th>
-                        {{--                        <th>action</th>--}}
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    @if(isset($categories))
-                        @foreach($categories as $category)
-                            <tr>
-                                <td>{{$category->name}}</td>
-                                <td>{{$category->created_at}}</td>
-                            </tr>
-                        @endforeach
-                    @endif
-                    </tbody>
-                </table>
+                @include('livewire.category.home')
             </div>
             <!-- /.card-body -->
         </div>
