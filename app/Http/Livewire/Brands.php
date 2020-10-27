@@ -66,7 +66,6 @@ class Brands extends Component
     {
         $this->updateMode = true;
         $validatedData = $this->validate(BrandRequest::getUpdate());
-        dd($validatedData);
         $brand_data = BrandRequest::getTransatableData($validatedData);
         $brand = Brand::where('id', $this->brand_id)->first();
         $brandService = new BrandService(new BrandRepository(new Brand()));

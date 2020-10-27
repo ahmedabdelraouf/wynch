@@ -4,7 +4,7 @@
 namespace Dev\Domain\Service;
 
 use Dev\Domain\Service\Abstracts\AbstractService;
-use Dev\Infrastructure\Models\Category;
+use Dev\Infrastructure\Models\Brand;
 use Dev\Infrastructure\Repository\Abstracts\AbstractRepository;
 use Dev\Infrastructure\Repository\BrandRepository;
 use Illuminate\Http\Response;
@@ -38,7 +38,7 @@ class BrandService extends AbstractService
      */
     public function store(array $data)
     {
-        if (isset($data['image'])&&!empty($data['image']))
+        if (isset($data['image']) && !empty($data['image']))
             $data['image'] = $data['image']->store('storage/uploads/brands', 'public');
         return $this->repository->create($data);
     }
@@ -47,16 +47,16 @@ class BrandService extends AbstractService
      * Update the specified resource in storage.
      *
      * @param array $data
-     * @param Category $category
+     * @param Brand $brand
      * @return AbstractRepository
      */
-    public function update(array $data, Category $category)
+    public function update(array $data, Brand $brand)
     {
-        $this->repository = $category;
+        $this->repository = $brand;
         if (isset($data['image']) && !empty($data['image'])) {
             $data['image'] = $data['image']->store('storage/uploads/categories', 'public');
-            if (file_exists($category->image)) {
-                unlink($category->image);
+            if (file_exists($brand->image)) {
+                unlink($brand->image);
             }
         } else {
             $data['image'] = $this->repository->image;

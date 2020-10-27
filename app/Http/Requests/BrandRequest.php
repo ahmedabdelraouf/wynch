@@ -16,6 +16,7 @@ class BrandRequest extends AbstractFormRequest
     ];
 
     public static $update = [
+        'category_id' => 'required|exists:categories,id',
         'name' => 'sometimes|required|unique:categories',
         'ar_name' => 'sometimes|required',
         'description' => 'sometimes|string',
