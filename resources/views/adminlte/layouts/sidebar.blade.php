@@ -41,7 +41,7 @@
                 <li class="nav-item">
                     <a href="{{route('brands')}}"
                        class="nav-link @if(Route::currentRouteName()=='brands') active @endif">
-{{--                        <i class="nav-icon far fa-list-alt"></i>--}}
+                        {{--                        <i class="nav-icon far fa-list-alt"></i>--}}
                         <i class="nav-icon fas fa-band-aid"></i>
                         <p>
                             Brands
@@ -49,11 +49,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('categories')}}"
-                       class="nav-link @if(Route::currentRouteName()=='cars') active @endif">
+                    <a href="{{route('vehicles')}}"
+                       class="nav-link @if(Route::currentRouteName()=='vehicles') active @endif">
                         <i class="nav-icon fas fa-car"></i>
                         <p>
-                            Vehicles
+                            {{trans('general.vehicles')}}
                         </p>
                     </a>
                 </li>

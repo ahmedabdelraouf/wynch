@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BrandResource extends JsonResource
+class VehicleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +19,7 @@ class BrandResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'image' => $this->image,
-//            'vehicles' => VehicleResource::collection($this->vehicles), //this will let us in infinite loop
+            'brand' => new BrandResource($this->brand)
         ];
     }
 }

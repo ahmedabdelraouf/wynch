@@ -29,6 +29,7 @@ class BrandController extends Controller
     public function index(Request $request)
     {
         $categories = $this->BrandService->index($request->all());
+//        dd('here',$categories);
         return BrandResource::collection($categories);
     }
 

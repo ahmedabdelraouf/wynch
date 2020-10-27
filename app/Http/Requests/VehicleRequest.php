@@ -4,11 +4,11 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Abstracts\AbstractFormRequest;
 
-class BrandRequest extends AbstractFormRequest
+class VehicleRequest extends AbstractFormRequest
 {
     public static $store = [
-        'category_id' => 'required|exists:categories,id',
-        'name' => 'required|unique:brands',
+        'name' => 'required|unique:vehicles',
+        'brand_id' => 'required|exists:brands,id',
         'ar_name' => 'required',
         'description' => 'string',
         'ar_description' => 'string',
@@ -16,8 +16,8 @@ class BrandRequest extends AbstractFormRequest
     ];
 
     public static $update = [
-        'category_id' => 'required|exists:categories,id',
-        'name' => 'sometimes|required|unique:categories',
+        'brand_id' => 'required|exists:brands,id',
+        'name' => 'sometimes|required|unique:vehicles',
         'ar_name' => 'sometimes|required',
         'description' => 'sometimes|string',
         'ar_description' => 'sometimes|string',
@@ -81,7 +81,7 @@ class BrandRequest extends AbstractFormRequest
                 'description' => $array['ar_description'],
             ],
             'image' => $array['image'],
-            'category_id' => $array['category_id']
+            'brand_id' => $array['brand_id']
         ];
     }
 }

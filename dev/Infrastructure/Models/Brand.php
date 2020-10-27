@@ -20,4 +20,9 @@ class Brand extends Model implements TranslatableContract
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class, 'brand_id', 'id');
+    }
 }
