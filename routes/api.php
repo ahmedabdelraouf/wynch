@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\BrandController;
 use App\Http\Controllers\API\CarController;
 use App\Http\Controllers\API\CategoryController;
 use Illuminate\Http\Request;
@@ -28,4 +29,5 @@ Route::post('/forgetPassword', [AuthController::class, 'forgetPassword']);
 Route::post('/verifyPhone', [AuthController::class, 'verifyPhone']);
 
 Route::apiResource('category', CategoryController::class)->middleware('auth:api');
+Route::apiResource('brand', BrandController::class)->middleware('auth:api');
 Route::apiResource('car', CarController::class)->middleware('auth:api');

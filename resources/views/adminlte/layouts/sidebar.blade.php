@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('categories')}}"
+                    <a href="{{route('brands')}}"
                        class="nav-link @if(Route::currentRouteName()=='brands') active @endif">
 {{--                        <i class="nav-icon far fa-list-alt"></i>--}}
                         <i class="nav-icon fas fa-band-aid"></i>
