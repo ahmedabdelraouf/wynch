@@ -38,7 +38,6 @@ class UserService extends AbstractService
         return ['user' => $user, 'access_token' => $accessToken];
     }
 
-
     public function login(array $loginData)
     {
         if (!auth()->attempt($loginData)) {
