@@ -31,22 +31,32 @@ class UserService extends AbstractService
     public function register(array $data)
     {
         $data['password'] = bcrypt($data['password']);
-        $data['image'] = $data['image']->store('storage/uploads/users', 'public');
+        if (isset($data['image']) && $data['image'] != null)
+            $data['image'] = $data['image']->store('storage/uploads/users', 'public');
         $user = $this->repository->create($data);
         $accessToken = $user->createToken('authToken')->accessToken;
         //TODO send email and phone confirmation codes
         return ['user' => $user, 'access_token' => $accessToken];
     }
 
+    /**
+     * @param array $loginData
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function login(array $loginData)
     {
         if (!auth()->attempt($loginData)) {
-            return response(['message' => 'Invalid Credentials']);
+            return response(['message' => 'Invalid username or password']);
         }
         $accessToken = auth()->user()->createToken('authToken')->accessToken;
         return response(['user' => auth()->user(), 'access_token' => $accessToken]);
     }
 
+    /**
+     * @param User $user
+     * @param array $validated
+     * @return User|\Dev\Infrastructure\Repository\Abstracts\AbstractRepository
+     */
     public function updateProfile(User $user, array $validated)
     {
         $this->repository = $user;
