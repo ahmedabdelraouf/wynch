@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
@@ -30,3 +31,4 @@ Route::get('/users', [UserController::class, 'index'])->name('users');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::get('/brands', [BrandController::class, 'index'])->name('brands');
 Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles');
+Route::get('/drivers', [DriverController::class, 'index'])->name('drivers');

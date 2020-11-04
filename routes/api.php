@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\BrandController;
 use App\Http\Controllers\API\CarController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\DriverController;
 use App\Http\Controllers\API\VehicleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,5 @@ Route::apiResource('category', CategoryController::class)->middleware('auth:api'
 Route::apiResource('brand', BrandController::class)->middleware('auth:api');
 Route::apiResource('vehicles', VehicleController::class)->middleware('auth:api');
 Route::apiResource('car', CarController::class)->middleware('auth:api');
+Route::apiResource('drivers', DriverController::class)->middleware('auth:api');
+Route::post('driver/changeStatus/{driver}', [DriverController::class, 'changeStatus'])->middleware('auth:api');
