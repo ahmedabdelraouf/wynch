@@ -33,9 +33,10 @@ class UserService extends AbstractService
         $data['password'] = bcrypt($data['password']);
         if (isset($data['image']) && $data['image'] != null)
             $data['image'] = $data['image']->store('storage/uploads/users', 'public');
+        $data['phone_code'] = generateCode();
         $user = $this->repository->create($data);
+        sendMessage([$user->mobile], 'Please use this code to activate your account ' . $user->phone_code, 1);
         $accessToken = $user->createToken('authToken')->accessToken;
-        //TODO send email and phone confirmation codes
         return ['user' => $user, 'access_token' => $accessToken];
     }
 
