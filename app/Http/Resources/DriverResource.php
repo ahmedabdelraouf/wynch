@@ -15,6 +15,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed car_licence
  * @property mixed driving_licence
  * @property mixed is_active
+ *
  */
 class DriverResource extends JsonResource
 {

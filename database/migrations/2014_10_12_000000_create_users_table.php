@@ -1,5 +1,7 @@
 <?php
 
+use Dev\Application\Utility\UserGender;
+use Dev\Application\Utility\UserType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,6 +26,8 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique()->nullable();
             $table->string('phone_code')->nullable();
             $table->timestamp('phone_verified_at')->nullable();
+            $table->enum('gender', UserGender::genderTypesArr())->nullable();
+            $table->enum('type', UserType::userTypesArr())->default(UserType::USER);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -31,12 +31,18 @@ class UserGender
     /**
      *
      */
-    public static function genderTypesArr() : array
+    public static function genderTypesArr(): array
     {
         return [
             self::MALE,
             self::FEMALE
         ];
+    }
+
+
+    public static function explodedGender()
+    {
+        return self::MALE . ',' . self::FEMALE;
     }
 
     /**
