@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Dev\Infrastructure\Models\Driver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,4 +40,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'phone_verified_at' => 'datetime',
     ];
+
+    public function driver()
+    {
+        return $this->hasOne(Driver::class, 'user_id', 'id');
+    }
 }

@@ -38,8 +38,6 @@ class DriverService extends AbstractService
      */
     public function store(array $data)
     {
-        if (isset($data['image']))
-            $data['image'] = $data['image']->store('storage/uploads/drivers/images', 'public');
         $data['national_id'] = $data['national_id']->store('storage/uploads/drivers/national_id', 'public');
         $data['drug_test'] = $data['drug_test']->store('storage/uploads/drivers/drug_test', 'public');
         $data['driving_licence'] = $data['driving_licence']->store('storage/uploads/drivers/driving_licence', 'public');

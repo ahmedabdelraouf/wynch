@@ -15,9 +15,9 @@ class CreateDriversTable extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable();
-            $table->string('name')->nullable();
-            $table->string('mobile')->nullable();
+            // Foreign key to the main model
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('national_id')->nullable();
             $table->string('drug_test')->nullable();
             $table->string('car_licence')->nullable();

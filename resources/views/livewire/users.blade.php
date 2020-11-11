@@ -15,6 +15,7 @@
             <th>Email</th>
             <th>phone</th>
             <th>phone verified</th>
+            <th>UserType</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -38,7 +39,8 @@
                         <button style="margin-top: .5rem" wire:click="verify({{ $user->id }})"
                                 class="btn btn-info btn-sm">Activate account
                         </button>
-                    @endif
+                @endif
+                <td>{{ $user->type }}</td>
                 <td>
                     <button data-toggle="modal" data-target="#updateModal" wire:click="edit({{ $user->id }})"
                             class="btn btn-primary btn-sm">Edit

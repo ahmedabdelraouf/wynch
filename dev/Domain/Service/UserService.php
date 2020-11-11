@@ -5,18 +5,23 @@ namespace Dev\Domain\Service;
 
 
 use App\Models\User;
+use Dev\Application\Utility\UserType;
 use Dev\Domain\Service\Abstracts\AbstractService;
 use Dev\Infrastructure\Repository\UserRepository;
 
 class UserService extends AbstractService
 {
+    private $driverService;
+
     /**
      * UserService constructor.
      * @param UserRepository $repository
+     * @param DriverService $driverService
      */
-    public function __construct(UserRepository $repository)
+    public function __construct(UserRepository $repository, DriverService $driverService)
     {
         parent::__construct($repository);
+        $this->driverService = $driverService;
     }
 
     /**
@@ -33,11 +38,15 @@ class UserService extends AbstractService
         $data['password'] = bcrypt($data['password']);
         if (isset($data['image']) && $data['image'] != null)
             $data['image'] = $data['image']->store('storage/uploads/users', 'public');
-        sendMessage(['01014158911'], 'Please use this code to activate your account ' . 1254, 1);
         $data['phone_code'] = generateCode();
         $user = $this->repository->create($data);
-//        sendMessage([$user->mobile], 'Please use this code to activate your account ' . $user->phone_code, 1);
+        sendMessage([$user->phone], 'Please use this code to activate your account ' . $user->phone_code, 1);
         $accessToken = $user->createToken('authToken')->accessToken;
+        if ($user->type == UserType::DRIVER) {
+            $data['user_id'] = $user->id;
+            $info = \Arr::only($data, ['user_id', 'national_id', 'drug_test', 'driving_licence', 'car_licence']);
+            $this->driverService->store($info);
+        }
         return ['user' => $user, 'access_token' => $accessToken];
     }
 

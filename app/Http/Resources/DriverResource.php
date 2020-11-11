@@ -6,10 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @property mixed name
- * @property mixed id
- * @property mixed mobile
- * @property mixed image
  * @property mixed national_id
  * @property mixed drug_test
  * @property mixed car_licence
@@ -28,10 +24,6 @@ class DriverResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'mobile' => $this->mobile,
-            'image' => $this->image,
             'national_id' => $this->national_id,
             'drug_test' => $this->drug_test,
             'car_licence' => $this->car_licence,

@@ -2,20 +2,31 @@
 
 namespace App\Http\Resources;
 
+use Dev\Application\Utility\UserType;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
+/**
+ * @property mixed type
+ * @property mixed driver
+ * @property mixed image
+ * @property mixed phone
+ * @property mixed email
+ * @property mixed gender
+ * @property mixed name
+ * @property mixed id
+ */
 class User extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return array
      */
     public function toArray($request)
     {
-        return [
+        $data = [
             'id' => $this->id,
             'name' => $this->name,
             'gender' => $this->gender,
@@ -24,5 +35,14 @@ class User extends JsonResource
             'phone' => $this->phone,
             'image' => $this->image,
         ];
+        switch ($this->type) {
+            case UserType::DRIVER:
+                return array_merge($data, ['driver' => new DriverResource($this->driver)]);
+                break;
+            case UserType::USER:
+            default:
+                return array_merge($data);
+                break;
+        }
     }
 }
