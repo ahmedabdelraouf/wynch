@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandRequest;
 use App\Http\Resources\BrandResource;
+use App\Http\Resources\VehicleResource;
 use Dev\Domain\Service\BrandService;
+use Dev\Infrastructure\Models\Brand;
 use Dev\Infrastructure\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -55,7 +57,17 @@ class BrandController extends Controller
     public function show(Category $category)
     {
         return new BrandResource($category);
+    }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param Brand $brand
+     * @return AnonymousResourceCollection ()
+     */
+    public function brandVehicles(Brand $brand)
+    {
+        return VehicleResource::collection($brand->vehicles()->get());
     }
 
     /**

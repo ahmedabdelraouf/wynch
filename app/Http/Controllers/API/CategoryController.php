@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Resources\BrandResource;
 use App\Http\Resources\CategoryResource;
 use App\Models\Car;
 use Dev\Domain\Service\CategoryService;
@@ -84,9 +85,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Car $car
+     * @param Category $category
      * @return Response
-     * @throws Exception
      */
     public function destroy(Category $category)
     {
@@ -95,5 +95,15 @@ class CategoryController extends Controller
             return response(['message' => 'Deleted']);
         else
             return response(['message' => 'Not deleted']);
+    }
+
+    /**
+     * @param Category $category
+     * @return AnonymousResourceCollection
+     */
+    public function categoryBrands(Category $category)
+    {
+//        dd($category->brands()->get()->toArray());
+        return BrandResource::collection($category->brands()->get());
     }
 }

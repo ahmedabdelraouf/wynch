@@ -23,7 +23,10 @@ Route::post('/verifyPhone', [AuthController::class, 'verifyPhone']);
 
 Route::apiResource('category', CategoryController::class)->middleware('auth:api');
 Route::apiResource('brand', BrandController::class)->middleware('auth:api');
+Route::get('categoryBrands/{category}', [CategoryController::class,'categoryBrands'])->middleware('auth:api');
+Route::get('brandVehicles/{brand}', [BrandController::class,'brandVehicles'])->middleware('auth:api');
 Route::apiResource('vehicles', VehicleController::class)->middleware('auth:api');
+Route::apiResource('brand', BrandController::class)->middleware('auth:api');
 Route::apiResource('userVehicles', UserVehicleController::class)->middleware('auth:api');
 Route::apiResource('car', CarController::class)->middleware('auth:api');
 Route::apiResource('drivers', DriverController::class)->middleware('auth:api');
