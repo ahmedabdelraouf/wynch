@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Dev\Infrastructure\Models\Driver;
+use Dev\Infrastructure\Models\UserVehicles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,4 +46,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Driver::class, 'user_id', 'id');
     }
+
+    public function vehicles()
+    {
+        return $this->hasMany(UserVehicles::class, 'user_id', 'id');
+    }
+
 }
