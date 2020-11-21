@@ -122,4 +122,16 @@ class UserService extends AbstractService
             }
         return response(['message' => 'Invalid Phone number or code'], 400);
     }
+
+    public function sendCode(array $data)
+    {
+        $user = $this->repository->where('phone', $data['phone'])->first();
+        if (isset($user)) {
+            $user->phone_code = 123456;
+//            $user->phone_code = generateCode();
+            $user->save();
+            return response(['message' => 'Message sent successfully.']);
+        }
+        return response(['message' => 'Invalid Phone number.'], 400);
+    }
 }

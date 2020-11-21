@@ -21,6 +21,7 @@ Route::get('/profile/{user}', [AuthController::class, 'profile']);
 Route::post('/profile/{user}', [AuthController::class, 'updateProfile']);
 Route::post('/forgetPassword', [AuthController::class, 'forgetPassword']);
 Route::post('/verifyPhone', [AuthController::class, 'verifyPhone']);
+Route::post('/sendCode', [AuthController::class, 'sendCode']);
 
 Route::apiResource('category', CategoryController::class)->middleware('auth:api');
 Route::apiResource('package', PackageController::class)->middleware('auth:api');

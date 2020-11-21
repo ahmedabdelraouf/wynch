@@ -8,6 +8,7 @@ use App\Http\Requests\user\LoginRequest;
 use App\Http\Requests\user\ProfileRequest;
 use App\Http\Requests\user\RegisterRequest;
 use App\Http\Requests\user\RegisterRequestRequest;
+use App\Http\Requests\user\SendCodeRequest;
 use App\Http\Requests\user\VerifyPhoneRequest;
 use App\Http\Resources\User as UserResource;
 use App\Models\User;
@@ -53,5 +54,9 @@ class AuthController extends Controller
     public function verifyPhone(VerifyPhoneRequest $request)
     {
         return $this->userService->verifyPhone($request->validated());
+    }
+    public function sendCode(SendCodeRequest $request)
+    {
+        return $this->userService->sendCode($request->validated());
     }
 }
