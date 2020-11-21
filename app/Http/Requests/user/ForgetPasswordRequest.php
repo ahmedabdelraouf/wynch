@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\user;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Abstracts\AbstractFormRequest;
 
-class ForgetPasswordRequest extends FormRequest
+class ForgetPasswordRequest extends AbstractFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ForgetPasswordRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class ForgetPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required_without:phone|email|unique:users,email',
+            'phone' => 'required_without:email|unique:users,phone|regex:/(01)[0-9]{9}/',
+            'password' => 'required|confirmed',
+            'code' => 'required'
         ];
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\user;
 
+use App\Http\Requests\Abstracts\AbstractFormRequest;
+use DateTime;
 use Illuminate\Foundation\Http\FormRequest;
 
-class VerifyPhoneRequest extends FormRequest
+class VerifyPhoneRequest extends AbstractFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +15,7 @@ class VerifyPhoneRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,9 @@ class VerifyPhoneRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'email' => 'required_without:phone|email',
+            'phone' => 'required_without:email|regex:/(01)[0-9]{9}/',
+            'code' => 'required',
         ];
     }
 }

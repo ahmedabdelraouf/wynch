@@ -5,4 +5,6 @@ return [
     'brand' => 'Brand',
     'brands' => 'Brands',
     'vehicles' => 'Vehicles',
+    'packages' => 'Packages',
+    'add_vehicle' => 'add Vehicle',
 ];

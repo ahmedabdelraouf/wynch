@@ -26,11 +26,17 @@ class User extends JsonResource
      */
     public function toArray($request)
     {
+        $type = 0;
+        switch ($this->type) {
+            case UserType::DRIVER :
+                $type = 1;
+                break;
+        }
         $data = [
             'id' => $this->id,
             'name' => $this->name,
             'gender' => $this->gender,
-            'type' => $this->type,
+            'type' => $type,
             'email' => $this->email,
             'phone' => $this->phone,
             'image' => $this->image,

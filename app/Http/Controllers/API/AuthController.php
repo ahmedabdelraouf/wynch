@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\user\ForgetPasswordRequest;
 use App\Http\Requests\user\LoginRequest;
 use App\Http\Requests\user\ProfileRequest;
 use App\Http\Requests\user\RegisterRequest;
 use App\Http\Requests\user\RegisterRequestRequest;
+use App\Http\Requests\user\VerifyPhoneRequest;
 use App\Http\Resources\User as UserResource;
 use App\Models\User;
 use Dev\Domain\Service\UserService;
@@ -43,13 +45,13 @@ class AuthController extends Controller
 //        return response(['user' => $user]);
     }
 
-    public function forgetPassword(LoginRequest $request)
+    public function forgetPassword(ForgetPasswordRequest $request)
     {
-        return $this->userService->forgetPassword($request);
+        return $this->userService->forgetPassword($request->validated());
     }
 
-    public function verifyPhone(LoginRequest $request)
+    public function verifyPhone(VerifyPhoneRequest $request)
     {
-        return $this->userService->verifyPhone($request);
+        return $this->userService->verifyPhone($request->validated());
     }
 }

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\BrandResource;
 use App\Http\Resources\CategoryResource;
-use App\Models\Car;
 use Dev\Domain\Service\CategoryService;
 use Dev\Infrastructure\Models\Category;
 use Illuminate\Http\Request;
@@ -103,7 +102,6 @@ class CategoryController extends Controller
      */
     public function categoryBrands(Category $category)
     {
-//        dd($category->brands()->get()->toArray());
         return BrandResource::collection($category->brands()->get());
     }
 }

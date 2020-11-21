@@ -57,6 +57,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('packages')}}"
+                       class="nav-link @if(Route::currentRouteName()=='packages') active @endif">
+                        <i class="nav-icon fas fa-car"></i>
+                        <p>
+                            {{trans('general.packages')}}
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

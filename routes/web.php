@@ -31,4 +31,5 @@ Route::get('/users', [UserController::class, 'index'])->name('users');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::get('/brands', [BrandController::class, 'index'])->name('brands');
 Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles');
+Route::get('/packages', [VehicleController::class, 'index'])->name('packages');
 Route::get('/drivers', [DriverController::class, 'index'])->name('drivers');

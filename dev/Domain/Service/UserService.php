@@ -8,6 +8,8 @@ use App\Models\User;
 use Dev\Application\Utility\UserType;
 use Dev\Domain\Service\Abstracts\AbstractService;
 use Dev\Infrastructure\Repository\UserRepository;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Response;
 
 class UserService extends AbstractService
 {
@@ -52,12 +54,12 @@ class UserService extends AbstractService
 
     /**
      * @param array $loginData
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return ResponseFactory|Response
      */
     public function login(array $loginData)
     {
         if (!auth()->attempt($loginData)) {
-            return response(['message' => 'Invalid username or password']);
+            return response(['message' => 'Invalid username or password'], 403);
         }
         $accessToken = auth()->user()->createToken('authToken')->accessToken;
         return response(['user' => auth()->user(), 'access_token' => $accessToken]);
@@ -89,4 +91,35 @@ class UserService extends AbstractService
         return $this->repository;
     }
 
+
+    /**
+     * @param array $data
+     * @return ResponseFactory|Response
+     */
+    public function verifyPhone(array $data)
+    {
+        $user = $this->repository->where('phone', $data['phone'])->first();
+        if ($user->phone_code == $data['code']) {
+            $user->phone_verified_at = date("m/d/Y h:i:s", time());
+            $user->save();
+            return response(['message' => 'account activated successfully']);
+        }
+        return response(['message' => 'Invalid code'], 400);
+    }
+
+    /**
+     * @param array $data
+     * @return ResponseFactory|Response
+     */
+    public function forgetPassword(array $data)
+    {
+        $user = $this->repository->where('phone', $data['phone'])->first();
+        if (isset($user))
+            if ($user->phone_code == $data['code']) {
+                $user->password = bcrypt($data['password']);
+                $user->save();
+                return response(['message' => 'Password updated successfully']);
+            }
+        return response(['message' => 'Invalid Phone number or code'], 400);
+    }
 }
