@@ -27,7 +27,7 @@ class AuthController extends Controller
     {
         $data = $this->userService->register($request->validated());
         $returnData = new UserResource($data['user']);
-        return $returnData;
+        return response()->json(['user'=>$returnData,'access_token'=>$data['access_token']]);
     }
 
     public function login(LoginRequest $request)

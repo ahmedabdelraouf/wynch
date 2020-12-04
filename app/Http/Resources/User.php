@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Dev\Application\Utility\UserGender;
 use Dev\Application\Utility\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -32,10 +33,16 @@ class User extends JsonResource
                 $type = 1;
                 break;
         }
+        $gender = 0;
+        switch ($this->gender) {
+            case UserGender::FEMALE :
+                $gender = 1;
+                break;
+        }
         $data = [
             'id' => $this->id,
             'name' => $this->name,
-            'gender' => $this->gender,
+            'gender' => $gender,
             'type' => $type,
             'email' => $this->email,
             'phone' => $this->phone,

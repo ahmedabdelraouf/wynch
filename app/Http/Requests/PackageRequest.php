@@ -73,6 +73,9 @@ class PackageRequest extends FormRequest
 
     public static function getTransatableData(array $array)
     {
+        $image = null;
+        if (isset($array['image']))
+            $image = $array['image'];
         return [
             'en' => [
                 'name' => $array['name'],
@@ -82,7 +85,7 @@ class PackageRequest extends FormRequest
                 'name' => $array['ar_name'],
                 'description' => $array['ar_description'],
             ],
-            'image' => $array['image']
+            'image' => $image
         ];
     }
 }

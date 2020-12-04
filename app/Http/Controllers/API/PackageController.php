@@ -43,10 +43,12 @@ class PackageController extends Controller
     {
         $package_data = [
             'en' => [
-                'name' => $request->input('name')
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
             ],
             'ar' => [
-                'name' => $request->input('ar_name')
+                'name' => $request->input('ar_name'),
+                'description' => $request->input('description_ar'),
             ],
             'image' => $request->image,
         ];
