@@ -20,7 +20,7 @@ class UserVehicleResource extends JsonResource
     {
         return [
             'user_id' => $this->user_id,
-            'vehicle_id' => $this->vehicle_id,
+            'vehicle' => new VehicleResource($this->vehicle),
             'plate_number' => $this->plate_number
         ];
     }

@@ -3,8 +3,8 @@
 
 namespace Dev\Domain\Service;
 
+use App\Models\User;
 use Dev\Domain\Service\Abstracts\AbstractService;
-use Dev\Infrastructure\Models\UserVehicles;
 use Dev\Infrastructure\Models\Vehicle;
 use Dev\Infrastructure\Repository\Abstracts\AbstractRepository;
 use Dev\Infrastructure\Repository\UserVehicleRepository;
@@ -51,16 +51,6 @@ class UserVehicleService extends AbstractService
      */
     public function update(array $data, Vehicle $vehicle)
     {
-        $this->repository = $vehicle;
-        if (isset($data['image']) && !empty($data['image'])) {
-            $data['image'] = $data['image']->store('storage/uploads/categories', 'public');
-            if (file_exists($vehicle->image)) {
-                unlink($vehicle->image);
-            }
-        } else {
-            $data['image'] = $this->repository->image;
-        }
-        $this->repository->update($data);
         return $this->repository;
     }
 
@@ -75,5 +65,9 @@ class UserVehicleService extends AbstractService
         return $this->repository->where('id', $id)->delete();
     }
 
+    public function getUserVehicles(User $user)
+    {
+
+    }
 
 }

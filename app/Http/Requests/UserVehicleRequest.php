@@ -7,13 +7,13 @@ use App\Http\Requests\Abstracts\AbstractFormRequest;
 class UserVehicleRequest extends AbstractFormRequest
 {
     public static $store = [
-        'user_id' => 'required|exists:brands,id',
+        'user_id' => 'required|exists:users,id',
         'vehicle_id' => 'required|exists:vehicles,id',
         'plate_number' => 'required|string',
     ];
 
     public static $update = [
-        'user_id' => 'required|exists:brands,id',
+        'user_id' => 'required|exists:users,id',
         'vehicle_id' => 'vehicles',
         'plate_number' => 'required|string'
     ];
@@ -55,12 +55,11 @@ class UserVehicleRequest extends AbstractFormRequest
         switch ($this->getMethod()) {
             case 'POST':
                 return self::$store;
-                break;
             case 'PUT':
                 return self::$update;
-                break;
+            default:
+                return [];
         }
-        return [];
     }
 
 }

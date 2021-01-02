@@ -19,7 +19,7 @@ class VehicleResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'image' => $this->image,
-            'brand' => new BrandResource($this->brand)
+            'brand_id' => $this->brand_id
         ];
     }
 }

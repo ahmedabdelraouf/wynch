@@ -31,6 +31,7 @@ Route::get('brandVehicles/{brand}', [BrandController::class, 'brandVehicles'])->
 Route::apiResource('vehicles', VehicleController::class)->middleware('auth:api');
 Route::apiResource('brand', BrandController::class)->middleware('auth:api');
 Route::apiResource('userVehicles', UserVehicleController::class)->middleware('auth:api');
+Route::get('getUserVehicles/{user}', [UserVehicleController::class, 'getUserVehicles']);
 Route::apiResource('car', CarController::class)->middleware('auth:api');
 //Route::apiResource('drivers', DriverController::class)->middleware('auth:api');
 Route::post('driver/changeStatus/{driver}', [DriverController::class, 'changeStatus'])->middleware('auth:api');

@@ -15,6 +15,7 @@ class UserType
      *
      */
     const ADMIN = 'admin';
+    const DRIVER = 'driver';
 
     /**
      *
@@ -25,6 +26,10 @@ class UserType
      *
      */
     const ADMIN_LABEL = 'Admin';
+    /**
+     *
+     */
+    const DRIVER_LABEL = 'Driver';
 
     /**
      *
@@ -33,13 +38,13 @@ class UserType
     {
         return [
             self::USER,
-            self::ADMIN
+            self::DRIVER
         ];
     }
 
     public static function explodedTypes()
     {
-        return self::USER . ',' . self::ADMIN;
+        return self::USER . ',' . self::DRIVER;
     }
 
     /**
@@ -50,7 +55,7 @@ class UserType
     {
         $types = [
             self::USER => self::USER_LABEL,
-            self::ADMIN => self::ADMIN_LABEL
+            self::DRIVER => self::DRIVER_LABEL
         ];
         return isset($types[$key]) ? $types[$key] : null;
     }

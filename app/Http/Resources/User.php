@@ -51,11 +51,9 @@ class User extends JsonResource
         switch ($this->type) {
             case UserType::DRIVER:
                 return array_merge($data, ['driver' => new DriverResource($this->driver)]);
-                break;
             case UserType::USER:
             default:
                 return array_merge($data);
-                break;
         }
     }
 }

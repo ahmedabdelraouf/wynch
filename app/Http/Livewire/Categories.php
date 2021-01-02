@@ -21,7 +21,7 @@ class Categories extends Component
         return view('livewire.categories');
     }
 
-    private function resetInputFields()
+    private function شresetInputFields()
     {
         $this->image = '';
         $this->name = '';

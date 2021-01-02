@@ -73,7 +73,7 @@ class UserService extends AbstractService
     public function updateProfile(User $user, array $validated)
     {
         $this->repository = $user;
-        if ($validated['image'] != null && isset($validated['image'])) {
+        if (isset($validated['image']) && $validated['image'] != null && isset($validated['image'])) {
             $validated['image'] = $validated['image']->store('storage/uploads/users', 'public');
         } else
             $validated['image'] = $this->repository->image;
@@ -81,10 +81,10 @@ class UserService extends AbstractService
         if ($validated['name'] == null || !isset($validated['name'])) {
             $validated['name'] = $this->repository->name;
         }
-        if ($validated['email'] == null || !isset($validated['email'])) {
+        if (isset($validated['email']) &&$validated['email'] == null || !isset($validated['email'])) {
             $validated['email'] = $this->repository->email;
         }
-        if ($validated['phone'] == null || !isset($validated['phone'])) {
+        if (isset($validated['phone']) && $validated['phone'] == null || !isset($validated['phone'])) {
             $validated['phone'] = $this->repository->phone;
         }
         $this->repository->update($validated);

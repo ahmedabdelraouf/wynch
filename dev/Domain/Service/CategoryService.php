@@ -25,8 +25,7 @@ class CategoryService extends AbstractService
      * @param array $filters
      * @return
      */
-    public function
-    index(array $filters = [])
+    public function index(array $filters = [])
     {
         return $this->repository->get();
     }

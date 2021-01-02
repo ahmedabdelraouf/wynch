@@ -56,7 +56,17 @@ class UserVehicleController extends Controller
     public function show(Vehicle $vehicle)
     {
         return new VehicleResource($vehicle);
+    }
 
+    /**
+     * getUserVehicles
+     *
+     * @param Vehicle $vehicle
+     * @return AnonymousResourceCollection()
+     */
+    public function getUserVehicles(\App\Models\User $user)
+    {
+        return UserVehicleResource::collection($user->vehicles);
     }
 
     /**
