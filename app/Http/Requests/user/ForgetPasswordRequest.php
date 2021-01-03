@@ -24,8 +24,8 @@ class ForgetPasswordRequest extends AbstractFormRequest
     public function rules()
     {
         return [
-            'email' => 'required_without:phone|email|unique:users,email',
-            'phone' => 'required_without:email|unique:users,phone|regex:/(01)[0-9]{9}/',
+            'email' => 'required_without:phone|email|exists:users,email',
+            'phone' => 'required_without:email|exists:users,phone|regex:/(01)[0-9]{9}/',
             'password' => 'required|confirmed',
             'code' => 'required'
         ];

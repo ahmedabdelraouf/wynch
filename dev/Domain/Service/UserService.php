@@ -81,7 +81,7 @@ class UserService extends AbstractService
         if ($validated['name'] == null || !isset($validated['name'])) {
             $validated['name'] = $this->repository->name;
         }
-        if (isset($validated['email']) &&$validated['email'] == null || !isset($validated['email'])) {
+        if (isset($validated['email']) && $validated['email'] == null || !isset($validated['email'])) {
             $validated['email'] = $this->repository->email;
         }
         if (isset($validated['phone']) && $validated['phone'] == null || !isset($validated['phone'])) {
